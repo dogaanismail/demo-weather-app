@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputCity = ({ onSubmitHnadle, city, onInputHandler }) => {
+const InputCity = ({ onSubmitHandler, city, onInputHandler }) => {
     return (
         <div className="input">
             <input
@@ -10,7 +10,7 @@ const InputCity = ({ onSubmitHnadle, city, onInputHandler }) => {
                 onChange={onInputHandler}
             />
             <br />
-            <button className="input-btn" type="submit" onClick={onSubmitHnadle}>
+            <button className="input-btn" type="submit" onClick={onSubmitHandler}>
                 Search
             </button>
         </div>

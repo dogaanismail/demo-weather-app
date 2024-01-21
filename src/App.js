@@ -14,28 +14,27 @@ const App = () => {
     setInputCity(e.target.value)
   };
 
-  const submitHandler = (e) => {
+  const onSubmitHandler = (e) => {
     e.preventDefault();
     setError(false);
     setCityName(inputCity);
   };
 
-  //  Weather API
-  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=7baf2fd950cd4bad1645f679c7af87a8`;
-
-  async function fetchData(URL) {
-    const response = await fetch(URL);
-    const data = await response.json();
-    if (data.cod === "404") {
-      setError(true);
-    } else {
-      setWeatherData(data);
-    }
-  }
-
   useEffect(() => {
-    fetchData(URL);
-  }, [URL]);
+    const URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=7baf2fd950cd4bad1645f679c7af87a8`;
+
+    async function fetchData() {
+      const response = await fetch(URL);
+      const data = await response.json();
+      if (data.cod === "404") {
+        setError(true);
+      } else {
+        setWeatherData(data);
+      }
+    };
+
+    fetchData();
+  }, [cityName]);
 
 
   return (
@@ -44,7 +43,7 @@ const App = () => {
       <InputCity
         city={inputCity}
         onInputHandler={inputHandler}
-        onSubmitHandler={submitHandler}
+        onSubmitHandler={onSubmitHandler}
       />
       {error ? (<h3 className="error">No data found :( </h3>)
         : (
